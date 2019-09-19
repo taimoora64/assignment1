@@ -1,0 +1,68 @@
+//Taimoor Aziz 
+//Assignment 1
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class Assignment1 {
+	public static void main(String[] args) {
+        try {
+                Scanner inputfile = new Scanner(new File("input.txt");
+                //While loop keep going while the file has another line
+                while(inputfile.hasNextLine()) {
+                        
+                        String word = inputfile.nextLine();
+                        
+                        //initiate result to true or false
+                        String result = isUniqueChar(word) ? "true" : "false";
+                        //Sort the word read in
+                        result += "\t" + sortWord(word);
+                        //print the result
+                        System.out.println(result);
+                }
+                //Close input file
+                inputfile.close();
+                
+        } catch (FileNotFoundException e) {
+                System.out.println("unable to find file data.txt in " + System.getProperty("user.dir"));
+        }
+	}
+		//Initiate boolean to get a true or false output
+        public static boolean isUniqueChar(String a) {
+        		//Set the string to all lower case
+                a = a.toLowerCase();
+                HashSet<Character> foundChars = new HashSet<>();
+                
+                for(char c: a.toCharArray()) {
+                        if(foundChars.contains(c)) {
+                                return false;
+                        }
+                        foundChars.add(c);
+                }
+                
+                return true;
+        }
+        
+        public static String sortWord(String a) {
+        		//Set array to make the contents lower case
+                char arr[] = a.toLowerCase().toCharArray();
+                //Set n to the length of the array
+                int n = arr.length;
+                for (int i = 1; i < n; ++i) {
+                        char ans = arr[i];
+                        int j = i - 1;
+
+                        while (j >= 0 && arr[j] > ans) {
+                                arr[j + 1] = arr[j];
+                                j = j - 1;
+                        }
+                        arr[j + 1] = ans;
+                }
+                return String.valueOf(arr);
+        }
+        
+       
+        }
+
+
